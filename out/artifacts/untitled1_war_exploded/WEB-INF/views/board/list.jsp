@@ -6,26 +6,30 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/WEB-INF/views/include/header.jsp" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<html lang="ko">
+<%@include file="/WEB-INF/views/include/head.jsp" %>
+
 <body>
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Company name</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
-            aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search"
-           aria-label="Search">
-    <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="#">Sign out</a>
-        </div>
-    </div>
-</header>
+<%@include file="/WEB-INF/views/include/header.jsp" %>
+
+<%--<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">--%>
+<%--    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Company name</a>--%>
+<%--    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"--%>
+<%--            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"--%>
+<%--            aria-label="Toggle navigation">--%>
+<%--        <span class="navbar-toggler-icon"></span>--%>
+<%--    </button>--%>
+<%--    <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search"--%>
+<%--           aria-label="Search">--%>
+<%--    <div class="navbar-nav">--%>
+<%--        <div class="nav-item text-nowrap">--%>
+<%--            <a class="nav-link px-3" href="#">Sign out</a>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</header>--%>
 
 <h2>Section title</h2>
 <div class="table-responsive">
@@ -55,13 +59,9 @@
         </tbody>
     </table>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-        crossorigin="anonymous"></script>
-<script src="/resources/js/dashboard.js"></script>
-
+<%@include file="/WEB-INF/views/include/scriptTag.jsp" %>
 </body>
 
-
 <%@include file="/WEB-INF/views/include/footer.jsp" %>
+
+</html>
