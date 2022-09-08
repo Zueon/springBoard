@@ -14,6 +14,22 @@
     <!--resultType : select 쿼리결과를 특정 클래스의 객체로 만들기 위한 설정-->
     <!--CDATA : XML에서 부등호 사용을 위해서-->
 
+    <select id="getListWithPaging" resultType="domain.BoardVO">
+        <![CDATA[
+        SELECT bno, title, content
+        FROM (SELECT
+                  /*+ INDEX_DESC(tbl_board pk_board)*/
+                  rownum rn,
+                  bno,
+                  title,
+                  content
+              FROM tbl_board
+              where rownum <= (#{pageNum} * #{amount})
+             )
+        WHERE rn > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+
     <insert id="insert">
         insert into tbl_board (bno, title, content, writer)
         values (seq_board.nextval, #{title}, #{content}, #{writer})
@@ -28,18 +44,22 @@
     </insert>
 
     <select id="read" resultType="domain.BoardVO">
-        select * from tbl_board where bno = #{bno}
+        select *
+        from tbl_board
+        where bno = #{bno}
     </select>
 
     <delete id="delete">
-        delete from tbl_board where bno = #{bno}
+        delete
+        from tbl_board
+        where bno = #{bno}
     </delete>
 
     <update id="update">
         UPDATE tbl_board
-        SET title = #{title},
-            content = #{content},
-            writer = #{writer},
+        SET title      = #{title},
+            content    = #{content},
+            writer     = #{writer},
             updateDate = sysdate
         WHERE bno = #{bno}
     </update>
