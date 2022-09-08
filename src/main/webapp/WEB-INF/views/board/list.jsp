@@ -5,7 +5,7 @@
   Time: 9:21 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -14,54 +14,63 @@
 
 <body>
 <%@include file="/WEB-INF/views/include/header.jsp" %>
+<div class="container-fluid">
+    <%@include file="/WEB-INF/views/include/sidebar.jsp" %>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <h2>Section title</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">BNO</th>
+                    <th scope="col">Title</th>
+<%--                    <th scope="col">Content</th>--%>
+                    <th scope="col">Writer</th>
+                    <th scope="col">regDate</th>
+                    <th scope="col">updateDate</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${list}" var="board">
+                    <tr>
+                        <td><c:out value="${board.bno}"/></td>
+                        <td><a href='/board/get?bno=<c:out value="${board.bno}"/> '>
+                            <c:out value="${board.title}"/></a>
+                        </td>
 
-<%--<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">--%>
-<%--    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Company name</a>--%>
-<%--    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"--%>
-<%--            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"--%>
-<%--            aria-label="Toggle navigation">--%>
-<%--        <span class="navbar-toggler-icon"></span>--%>
-<%--    </button>--%>
-<%--    <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search"--%>
-<%--           aria-label="Search">--%>
-<%--    <div class="navbar-nav">--%>
-<%--        <div class="nav-item text-nowrap">--%>
-<%--            <a class="nav-link px-3" href="#">Sign out</a>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</header>--%>
+                            <%--                        <td><c:out value="${board.content}"/></td>--%>
+                        <td><c:out value="${board.writer}"/></td>
+                        <td><fmt:formatDate value="${board.regdate}" pattern="yyyy-MM-dd"/></td>
+                        <td><fmt:formatDate value="${board.updateDate}" pattern="yyyy-MM-dd"/></td>
 
-<h2>Section title</h2>
-<div class="table-responsive">
-    <table class="table table-striped table-sm">
-        <thead>
-        <tr>
-            <th scope="col">BNO</th>
-            <th scope="col">Title</th>
-            <th scope="col">Content</th>
-            <th scope="col">Writer</th>
-            <th scope="col">regDate</th>
-            <th scope="col">updateDate</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${list}" var="board">
-            <tr>
-                <td><c:out value="${board.bno}"/></td>
-                <td><c:out value="${board.title}"/></td>
-                <td><c:out value="${board.content}"/></td>
-                <td><c:out value="${board.writer}"/></td>
-                <td><fmt:formatDate value="${board.regdate}" pattern="yyyy-MM-dd"/></td>
-                <td><fmt:formatDate value="${board.updateDate}" pattern="yyyy-MM-dd"/></td>
-
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+            <div class="modal" tabindex="-1" role="dialog"
+                 id="modal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content rounded-4 shadow">
+                        <div class="modal-header border-bottom-0">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body py-0">
+                            처리가 완료되었습니다.
+                        </div>
+                        <div class="modal-footer flex-column border-top-0">
+                            <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2">Save changes</button>
+                            <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal">Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
 <%@include file="/WEB-INF/views/include/scriptTag.jsp" %>
 </body>
 
-<%@include file="/WEB-INF/views/include/footer.jsp" %>
 
 </html>
