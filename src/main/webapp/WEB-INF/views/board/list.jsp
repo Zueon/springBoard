@@ -24,7 +24,7 @@
                 <tr>
                     <th scope="col">BNO</th>
                     <th scope="col">Title</th>
-<%--                    <th scope="col">Content</th>--%>
+                    <%--                    <th scope="col">Content</th>--%>
                     <th scope="col">Writer</th>
                     <th scope="col">regDate</th>
                     <th scope="col">updateDate</th>
@@ -47,6 +47,28 @@
                 </c:forEach>
                 </tbody>
             </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <c:if test="${pageMarker.prev}">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </c:if>
+
+                    <c:forEach var="num" begin="${pageMarker.startPage}" end="${pageMarker.endPage}">
+                        <li class="page-item"><a class="page-link" href="#">${num}</a></li>
+                    </c:forEach>
+                    <c:if test="${pageMarker.next}">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav>
             <div class="modal" tabindex="-1" role="dialog"
                  id="modal" aria-hidden="true">
                 <div class="modal-dialog" role="document">

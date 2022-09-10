@@ -2,6 +2,7 @@ package controller;
 
 import domain.BoardVO;
 import domain.Criteria;
+import domain.PageDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ public class BoardController {
     public void list(Criteria criteria, Model model){
         log.info("list:  " + criteria);
         model.addAttribute("list", service.getList(criteria));
+        model.addAttribute("pageMarker", new PageDTO(criteria, 123));
     }
 
     @GetMapping("/register")

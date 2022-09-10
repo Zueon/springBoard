@@ -16,13 +16,13 @@
 
     <select id="getListWithPaging" resultType="domain.BoardVO">
         <![CDATA[
-        SELECT bno, title, content
+        SELECT bno, title,  content, writer, regdate, updateDate
         FROM (SELECT
                   /*+ INDEX_DESC(tbl_board pk_board)*/
                   rownum rn,
                   bno,
                   title,
-                  content
+                  content, writer, regdate, updateDate
               FROM tbl_board
               where rownum <= (#{pageNum} * #{amount})
              )
