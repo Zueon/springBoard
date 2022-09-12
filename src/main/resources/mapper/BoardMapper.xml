@@ -63,4 +63,8 @@
             updateDate = sysdate
         WHERE bno = #{bno}
     </update>
+
+    <select id="getTotalCnt" resultType="int">
+        SELECT count(*) FROM tbl_board WHERE bno > 0
+    </select>
 </mapper>

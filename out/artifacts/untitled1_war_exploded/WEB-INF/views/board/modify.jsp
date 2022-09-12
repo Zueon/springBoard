@@ -67,6 +67,8 @@
                         LIST
                     </button>
                 </div>
+                <input type="hidden" id="pageNum" name="pageNum" value='<c:out value="${criteria.pageNum}" />'>
+                <input type="hidden" id="amount" name="amount" value='<c:out value="${criteria.amount}" />'>
             </form>
         </div>
 
@@ -76,6 +78,7 @@
 
 <%@include file="/WEB-INF/views/include/scriptTag.jsp" %>
 <script type="text/javascript">
+
     $(document).ready(function () {
         var formObj = $("form");
         $("button").on("click", function (e){
@@ -88,7 +91,11 @@
 
             }else if (operation === 'list'){
                 formObj.attr("action", "/board/list").attr("method", "get");
+                var pageNumTag = $("input[name='pageNum']").clone();
+                var amountTag = $("input[name='amount']").clone();
                 formObj.empty();
+                formObj.append(pageNumTag);
+                formObj.append(amountTag);
 
             }
             formObj.submit();

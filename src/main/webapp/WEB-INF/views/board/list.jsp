@@ -34,7 +34,7 @@
                 <c:forEach items="${list}" var="board">
                     <tr>
                         <td><c:out value="${board.bno}"/></td>
-                        <td><a href='/board/get?bno=<c:out value="${board.bno}"/> '>
+                        <td><a class="move" href='<c:out value="${board.bno}"/> '>
                             <c:out value="${board.title}"/></a>
                         </td>
 
@@ -51,24 +51,29 @@
                 <ul class="pagination justify-content-center">
                     <c:if test="${pageMarker.prev}">
                         <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
+                            <a class="page-link" href="${pageMarker.startPage -1}" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                     </c:if>
 
                     <c:forEach var="num" begin="${pageMarker.startPage}" end="${pageMarker.endPage}">
-                        <li class="page-item"><a class="page-link" href="#">${num}</a></li>
+                        <li class="page-item ${pageMarker.criteria.pageNum == num? "active" : ""}">
+                            <a class="page-link" href="${num}">${num}</a></li>
                     </c:forEach>
                     <c:if test="${pageMarker.next}">
                         <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
+                            <a class="page-link" href="${pageMarker.endPage +1}" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
                     </c:if>
                 </ul>
             </nav>
+            <form action="/board/list" method="get" id="actionForm">
+                <input type="hidden" name="pageNum" value="${pageMarker.criteria.pageNum}">
+                <input type="hidden" name="amount" value="${pageMarker.criteria.amount}">
+            </form>
             <div class="modal" tabindex="-1" role="dialog"
                  id="modal" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -92,6 +97,39 @@
     </main>
 </div>
 <%@include file="/WEB-INF/views/include/scriptTag.jsp" %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var result = '<c:out value="${result}"/> ';
+        checkModal(result);
+        history.replaceState({}, null, null);
+
+        function checkModal(result) {
+            if (result == '' || history.state) {
+                return;
+            }
+            if (parseInt(result) > 0) {
+                $(".modal-body").html("게시글 " + parseInt(result) + " 번이 등록되었습니다.");
+            }
+            $("#modal").modal("show");
+        }
+
+        var actionForm = $("#actionForm");
+        $(".page-item a").on("click", function (e) {
+            e.preventDefault();
+            console.log("click event");
+            actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+            actionForm.submit();
+        })
+
+        $(".move").on("click", function (e){
+            e.preventDefault();
+            actionForm.append("<input type='hidden' name='bno' value='"
+                +$(this).attr("href") + "'>");
+            actionForm.attr("action", "/board/get");
+            actionForm.submit();
+        })
+    });
+</script>
 </body>
 
 
